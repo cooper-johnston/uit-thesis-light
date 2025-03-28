@@ -1,0 +1,49 @@
+\documentclass[master]{thesis}
+
+\usepackage[backend=biber,style=numeric]{biblatex} % for citations
+\usepackage{stix2} % good font for body text and math
+
+\thesisFaculty{Faculty of Something}
+\thesisDepartment{Department of Something} % optional, can remove this line
+\title{Minimal Example of a Thesis With This Document Class}
+\thesisSubtitle{Here you can write a subtitle to elaborate on the contents of the thesis using no more than four lines of text} % optional, can remove this line
+\author{Author's Name}
+\thesisCourse{ABC-0000 Master's Thesis in Something}
+\date{Spring 2025}
+
+\begin{document}
+
+\maketitle
+
+\frontmatter
+
+\begin{abstract}
+
+Your thesis or dissertation should have an abstract in both English and Norwegian. It should go here at the very beginning, after the title page.
+
+\end{abstract}
+
+\begin{otherlanguage}{norsk}
+    % "norsk" defaults to bokmål; use "nynorsk" for nynorsk.
+\begin{abstract}
+
+Din oppgave eller avhandling skal ha et sammendrag på både engelsk og norsk. Det skal plasseres her ved starten, etter forsiden.
+
+\end{abstract}
+\end{otherlanguage}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{Introduction}
+
+Hello, world!
+
+\appendix
+
+\chapter{Extra Stuff}
+
+This is an appendix.
+
+\end{document}
