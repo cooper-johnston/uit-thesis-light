@@ -77,48 +77,29 @@
 % Title page
 % =============================================================================
 
-\newlength{\bleed}
-\setlength{\bleed}{3mm}
+\newlength{\th@titleBleed}
+\setlength{\th@titleBleed}{3mm}
 
-\newlength{\bleedoffset}
-\setlength{\bleedoffset}{0mm}
+\newlength{\th@titleBkgOffset}
+\setlength{\th@titleBkgOffset}{-\th@titleBleed}
 
-\newlength{\bkgoffset}
-\setlength{\bkgoffset}{-\bleed}
-
-\newlength{\bkgwidth}
-\setlength{\bkgwidth}{213mm}
-
-\newlength{\bkgheight}
-\setlength{\bkgheight}{300mm}
-
-\newcommand{\th@usebleed}{
-    \setlength{\bleedoffset}{\bleed}
-    \setlength{\bkgoffset}{0mm}
-    % \geometry{
-    %     paperwidth=\bkgwidth,
-    %     paperheight=\bkgheight,
-    %     layout=a4paper,
-    %     layoutoffset=\bleedoffset
-    % }
-}
+\newlength{\th@titleBkgWidth}
+\setlength{\th@titleBkgWidth}{216mm}
 
 \newcommand{\th@titlebkg}{\put(0,0){%
-    \parbox[b][\paperheight]{\paperwidth}{%
-        \vspace*{\bkgoffset}%
-        \hspace*{\bkgoffset}%
-        \includegraphics[width=\bkgwidth,height=\bkgheight]
-            {titlepage/element.pdf}%
+    \parbox[b][\th@paperheight]{\th@titleBkgWidth}{%
+        \vspace*{\th@titleBkgOffset}%
+        \hspace*{\th@titleBkgOffset}%
+        \includegraphics[width=\th@titleBkgWidth]{titlepage/element.pdf}%
         \vfill%
     }%
 }}
 
 \newcommand{\th@titlelogo}{\put(0,0){%
-    \parbox[b][\paperheight]{\paperwidth}{%
-        \vspace*{\bkgoffset}%
-        \hspace*{\bkgoffset}%
-        \includegraphics[width=\bkgwidth,height=\bkgheight]
-            {titlepage/logo_english.pdf}%
+    \parbox[b][\th@paperheight]{\th@titleBkgWidth}{%
+        \vspace*{\th@titleBkgOffset}%
+        \hspace*{\th@titleBkgOffset}%
+        \includegraphics[width=\th@titleBkgWidth]{titlepage/logo_english.pdf}%
         \vfill%
     }%
 }}
@@ -130,8 +111,8 @@
 
 \renewcommand{\maketitle}{%
     \newgeometry{
-        layout=a4paper,
-        layoutoffset=\bleedoffset,
+        layoutwidth=\th@paperwidth,
+        layoutheight=\th@paperheight,
         ignorehead,
         ignorefoot,
         top=0mm,
