@@ -19,6 +19,18 @@
 \newlength{\th@textwidth}
 \setlength{\th@textwidth}{360pt}
 
+% Default sizes for title page; see title page section further down
+\newlength{\th@titleElementWidth}
+\setlength{\th@titleElementWidth}{216mm}
+\newlength{\th@titleElementUnscaledHeight}
+\setlength{\th@titleElementUnscaledHeight}{180mm}
+\newlength{\th@titleElementBelow}
+\setlength{\th@titleElementBelow}{12mm}
+\newlength{\th@titleLogoBelow}
+\setlength{\th@titleLogoBelow}{272.8mm} % =297-(12+12.2)
+\newlength{\th@titleTextBottom}
+\setlength{\th@titleTextBottom}{89.5mm}
+
 % Default font size
 \newcommand{\th@fontsize}{11pt}
 
@@ -30,6 +42,11 @@
     \setlength{\th@vmargin}{69.35pt}
     \setlength{\th@leftmargin}{69.35pt} % for equal left and right margins
     \setlength{\th@textwidth}{345pt}
+    \setlength{\th@titleElementWidth}{176mm}
+    \setlength{\th@titleElementUnscaledHeight}{165.7mm} % =(216/176)*135
+    \setlength{\th@titleElementBelow}{10mm}
+    \setlength{\th@titleLogoBelow}{215.8mm} % =240-(12+12.2)
+    \setlength{\th@titleTextBottom}{82mm}
     \renewcommand{\th@fontsize}{10pt}
 }
 
@@ -80,28 +97,21 @@
 \newlength{\th@titleBleed}
 \setlength{\th@titleBleed}{3mm}
 
-\newlength{\th@titleBkgOffset}
-\setlength{\th@titleBkgOffset}{-\th@titleBleed}
-
-\newlength{\th@titleBkgWidth}
-\setlength{\th@titleBkgWidth}{216mm}
-
-\newcommand{\th@titlebkg}{\put(0,0){%
-    \parbox[b][\th@paperheight]{\th@titleBkgWidth}{%
-        \vspace*{\th@titleBkgOffset}%
-        \hspace*{\th@titleBkgOffset}%
-        \includegraphics[width=\th@titleBkgWidth]{titlepage/element.pdf}%
-        \vfill%
-    }%
+% element.pdf is 216x180 mm, sized for A4 paper with 3 mm bleed;
+% for PhD thesis with 170x240 mm paper, top edge of element should be cropped
+% so that element height is 135mm.
+\newcommand{\th@titleElement}{\put(-\th@titleBleed,\th@titleElementBelow){%
+    \includegraphics[
+        width=\th@titleElementWidth,
+        viewport=0mm 0mm 216mm \th@titleElementUnscaledHeight,
+        clip
+    ]{titlepage/element.pdf}%
 }}
 
-\newcommand{\th@titlelogo}{\put(0,0){%
-    \parbox[b][\th@paperheight]{\th@titleBkgWidth}{%
-        \vspace*{\th@titleBkgOffset}%
-        \hspace*{\th@titleBkgOffset}%
-        \includegraphics[width=\th@titleBkgWidth]{titlepage/logo_english.pdf}%
-        \vfill%
-    }%
+% Top left corner of logo is at (12 mm, 12 mm) from top left corner of page;
+% "UiT..." name aligns with thesis title text at 27 mm from left edge.
+\newcommand{\th@titleLogo}{\put(12mm,\th@titleLogoBelow){%
+    \includegraphics[height=12.2mm]{titlepage/logo_english.pdf}%
 }}
 
 \newcommand{\thesisFaculty}[1]{\gdef\@faculty{#1}}
@@ -111,25 +121,25 @@
 
 \renewcommand{\maketitle}{%
     \newgeometry{
-        layoutwidth=\th@paperwidth,
-        layoutheight=\th@paperheight,
+        % layoutwidth=\th@paperwidth,
+        % layoutheight=\th@paperheight,
         ignorehead,
         ignorefoot,
         top=0mm,
         left=27mm,
         right=12mm
     }%
-    \AddToShipoutPicture*{\th@titlebkg}%
-    \AddToShipoutPicture*{\th@titlelogo}%
+    \AddToShipoutPicture*{\th@titleElement}%
+    \AddToShipoutPicture*{\th@titleLogo}%
     \begin{titlepage}%
         \setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt}%
-        \begin{minipage}[b][89.5mm]{\textwidth}%
+        \begin{minipage}[b][\th@titleTextBottom]{\textwidth}%
             \raggedright\opensans%
             {\fontseries{l}\fontsize{12pt}{16.8pt}\selectfont%
                 \@faculty\\
                 \ifdefined\@department\@department\fi\par}%
-            \vspace{12pt}%
+            \vspace{10pt}%
             {\fontseries{sb}\fontsize{15pt}{18pt}\selectfont\@title\par}%
             \vspace{8pt}%
             \ifdefined\@subtitle%
