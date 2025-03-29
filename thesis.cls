@@ -134,14 +134,14 @@
         \setlength{\parskip}{0pt}%
         \begin{minipage}[b][89.5mm]{\textwidth}%
             \raggedright\opensans%
-            {\fontseries{l}\fontsize{13pt}{18.2pt}\selectfont%
+            {\fontseries{l}\fontsize{12pt}{16.8pt}\selectfont%
                 \@faculty\\
                 \ifdefined\@department\@department\fi\par}%
             \vspace{12pt}%
-            {\fontseries{sb}\fontsize{16pt}{19.2pt}\selectfont\@title\par}%
+            {\fontseries{sb}\fontsize{15pt}{18pt}\selectfont\@title\par}%
             \vspace{8pt}%
             \ifdefined\@subtitle%
-                {\fontseries{m}\fontsize{14pt}{16.8pt}\selectfont%
+                {\fontseries{m}\fontsize{13pt}{15.6pt}\selectfont%
                     \@subtitle\par}%
             \fi%
             \vspace{8pt}%
