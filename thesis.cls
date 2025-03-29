@@ -92,7 +92,7 @@
 \newlength{\bkgheight}
 \setlength{\bkgheight}{300mm}
 
-\newcommand{\UseBleed}{
+\newcommand{\th@usebleed}{
     \setlength{\bleedoffset}{\bleed}
     \setlength{\bkgoffset}{0mm}
     % \geometry{
@@ -103,12 +103,22 @@
     % }
 }
 
-\newcommand{\TitleBkg}{\put(0,0){%
+\newcommand{\th@titlebkg}{\put(0,0){%
     \parbox[b][\paperheight]{\paperwidth}{%
         \vspace*{\bkgoffset}%
         \hspace*{\bkgoffset}%
         \includegraphics[width=\bkgwidth,height=\bkgheight]
-            {titlepage/titlepage_blank.pdf}%
+            {titlepage/element.pdf}%
+        \vfill%
+    }%
+}}
+
+\newcommand{\th@titlelogo}{\put(0,0){%
+    \parbox[b][\paperheight]{\paperwidth}{%
+        \vspace*{\bkgoffset}%
+        \hspace*{\bkgoffset}%
+        \includegraphics[width=\bkgwidth,height=\bkgheight]
+            {titlepage/logo_english.pdf}%
         \vfill%
     }%
 }}
@@ -128,7 +138,8 @@
         left=27mm,
         right=12mm
     }%
-    \AddToShipoutPicture*{\TitleBkg}%
+    \AddToShipoutPicture*{\th@titlebkg}%
+    \AddToShipoutPicture*{\th@titlelogo}%
     \begin{titlepage}%
         \setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt}%
