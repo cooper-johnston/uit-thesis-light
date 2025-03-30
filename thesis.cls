@@ -50,6 +50,28 @@
     \renewcommand{\th@fontsize}{10pt}
 }
 
+% Default language
+\newcommand{\th@languages}{nynorsk,norsk,main=USenglish}
+\newcommand{\th@titleLogoFile}{english}
+
+% Language options
+\DeclareOption{USenglish}{} % default
+\DeclareOption{UKenglish}{
+    \renewcommand{\th@languages}{nynorsk,norsk,main=UKenglish}
+}
+\DeclareOption{norsk}{
+    \renewcommand{\th@languages}{UKenglish,USenglish,main=norsk}
+    \renewcommand{\th@titleLogoFile}{bokmål}
+}
+\DeclareOption{nynorsk}{
+    \renewcommand{\th@languages}{UKenglish,USenglish,main=nynorsk}
+    \renewcommand{\th@titleLogoFile}{nynorsk}
+}
+\DeclareOption{samin}{
+    \renewcommand{\th@languages}{UKenglish,USenglish,nynorsk,norsk,main=samin}
+    \renewcommand{\th@titleLogoFile}{samin}
+}
+
 % Suppress remaining book class options
 \DeclareOption*{\OptionNotUsed}
 
@@ -69,7 +91,7 @@
 \RequirePackage{csquotes}
 \RequirePackage{eso-pic}
 \RequirePackage{graphicx}
-\RequirePackage[USenglish]{babel}
+\RequirePackage[\th@languages]{babel}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[defaultsans,scale=0.92]{opensans}
     % scaled for more compatible x-height with most serif body text fonts
@@ -111,7 +133,7 @@
 % Top left corner of logo is at (12 mm, 12 mm) from top left corner of page;
 % "UiT..." name aligns with thesis title text at 27 mm from left edge.
 \newcommand{\th@titleLogo}{\put(12mm,\th@titleLogoBelow){%
-    \includegraphics[height=12.2mm]{titlepage/logo_english.pdf}%
+    \includegraphics[height=12.2mm]{titlepage/logo_\th@titleLogoFile.pdf}%
 }}
 
 \newcommand{\thesisFaculty}[1]{\gdef\@faculty{#1}}
