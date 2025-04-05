@@ -81,6 +81,7 @@
 % Packages
 % =============================================================================
 
+\RequirePackage[T1]{fontenc}
 \RequirePackage{geometry}
 \RequirePackage{emptypage}
 \RequirePackage{microtype}
