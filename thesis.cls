@@ -50,28 +50,6 @@
     \renewcommand{\th@fontsize}{10pt}
 }
 
-% Default language
-\newcommand{\th@languages}{nynorsk,norsk,main=USenglish}
-\newcommand{\th@titleLogoFile}{english}
-
-% Language options
-\DeclareOption{USenglish}{} % default
-\DeclareOption{UKenglish}{
-    \renewcommand{\th@languages}{nynorsk,norsk,main=UKenglish}
-}
-\DeclareOption{norsk}{
-    \renewcommand{\th@languages}{UKenglish,USenglish,main=norsk}
-    \renewcommand{\th@titleLogoFile}{bokmål}
-}
-\DeclareOption{nynorsk}{
-    \renewcommand{\th@languages}{UKenglish,USenglish,main=nynorsk}
-    \renewcommand{\th@titleLogoFile}{nynorsk}
-}
-\DeclareOption{samin}{
-    \renewcommand{\th@languages}{UKenglish,USenglish,nynorsk,norsk,main=samin}
-    \renewcommand{\th@titleLogoFile}{samin}
-}
-
 % Suppress remaining book class options
 \DeclareOption*{\OptionNotUsed}
 
@@ -92,7 +70,6 @@
 \RequirePackage{csquotes}
 \RequirePackage{eso-pic}
 \RequirePackage{graphicx}
-\RequirePackage[\th@languages]{babel}
 \RequirePackage[hidelinks]{hyperref}
 \RequirePackage[defaultsans,scale=0.92]{opensans}
     % scaled for more compatible x-height with most serif body text fonts
@@ -142,7 +119,15 @@
 \newcommand{\thesisSubtitle}[1]{\gdef\@subtitle{#1}}
 \newcommand{\thesisCourse}[1]{\gdef\@course{#1}}
 
+\newcommand{\th@titleLogoFile}{english} % logo in English by default
+
 \renewcommand{\maketitle}{%
+    \babelprovide[hyphenrules=finnish]{samin}% initializing Northern Sami
+    % Detect document language to select appropriate logo
+    \iflanguage{norsk}{\renewcommand{\th@titleLogoFile}{bokmål}}{%
+    \iflanguage{nynorsk}{\renewcommand{\th@titleLogoFile}{nynorsk}}{%
+    \iflanguage{samin}{\renewcommand{\th@titleLogoFile}{samin}}{}}}%
+    %
     \newgeometry{
         % layoutwidth=\th@paperwidth,
         % layoutheight=\th@paperheight,
@@ -247,3 +232,6 @@
 \frenchspacing % one space after period between sentences
 
 \raggedbottom
+
+% Norwegian-style quotes for Northern Sami with csquotes package
+\DeclareQuoteAlias[guillemets]{norwegian}{samin}
