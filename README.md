@@ -18,11 +18,13 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
     ```
     \documentclass[TYPE]{thesis}
     ```
-and replace ``TYPE`` with ``master`` or ``phd`` depending on your thesis type.
+
+    and replace ``TYPE`` with ``master`` or ``phd`` depending on your thesis type.
 4. In the preamble (before ``\begin{document}``), load the ``babel`` package:
     ```
     \usepackage[SECONDARY LANGUAGE,main=MAIN LANGUAGE]{babel}
     ```
+
     and replace ``SECONDARY LANGUAGE`` and ``MAIN LANGUAGE`` with the languages for your document. The main language will be the language of the UiT logo on the title page and the language used in headings like "Table of Contents". The supported options are
     * ``english``, ``USenglish``, or ``UKenglish`` for English
     * ``norsk`` for Bokmål;
@@ -33,6 +35,7 @@ and replace ``TYPE`` with ``master`` or ``phd`` depending on your thesis type.
     ```
     \usepackage{stix2}
     ```
+
     The order of the packages can sometimes lead to errors. If you load other packages, it is a good rule of thumb to put this one last. If you run into issues, try changing the order.
 6. Also in the preamble, specify the fields for the title page.\\
     **Required fields:**
@@ -55,6 +58,7 @@ and replace ``TYPE`` with ``master`` or ``phd`` depending on your thesis type.
 
     \end{document}
     ```
+    
     See the file ``example.tex`` for more.
 8. Compile with pdfLaTeX or LuaLaTeX (pdfLaTeX is the default option on Overleaf).
 
