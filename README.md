@@ -39,15 +39,15 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
     The order of the packages can sometimes lead to errors. If you load other packages, it is a good rule of thumb to put this one last. If you run into issues, try changing the order.
 6. Also in the preamble, specify the fields for the title page.  
     **Required fields:**
-        * ``\thesisFaculty{}``
-        * ``\title{}``
-        * ``\thesisSubtitle{}``
-        * ``\author{}``
-        * ``\thesisCourse{}`` (can enter the name of your program if there is no course code for your thesis)
-        * ``\date{}``
+    * ``\thesisFaculty{}``
+    * ``\title{}``
+    * ``\thesisSubtitle{}``
+    * ``\author{}``
+    * ``\thesisCourse{}`` (can enter the name of your program if there is no course code for your thesis)
+    * ``\date{}``
     **Optional fields:**
-        * ``\thesisDepartment{}`` (*institutt*)
-        * ``\thesisImage{}`` (the file name of an image to be shown on the title page)
+    * ``\thesisDepartment{}`` (*institutt*)
+    * ``\thesisImage{}`` (the file name of an image to be shown on the title page)
 7. Begin your document:
     ```
     \begin{document}
