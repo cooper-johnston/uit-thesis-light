@@ -22,8 +22,11 @@
 % Default sizes for title page; see title page section further down
 \newlength{\th@titleElementWidth}
 \setlength{\th@titleElementWidth}{216mm}
+\newlength{\th@titleElementHeight}
+\setlength{\th@titleElementHeight}{180mm}
+\newcommand{\th@titleElementScale}{1}
 \newlength{\th@titleElementUnscaledHeight}
-\setlength{\th@titleElementUnscaledHeight}{180mm}
+\setlength{\th@titleElementUnscaledHeight}{\th@titleElementHeight}
 \newlength{\th@titleElementBelow}
 \setlength{\th@titleElementBelow}{12mm}
 \newlength{\th@titleLogoBelow}
@@ -43,7 +46,10 @@
     \setlength{\th@leftmargin}{69.35pt} % for equal left and right margins
     \setlength{\th@textwidth}{345pt}
     \setlength{\th@titleElementWidth}{176mm}
-    \setlength{\th@titleElementUnscaledHeight}{165.7mm} % =(216/176)*135
+    \setlength{\th@titleElementHeight}{135mm}
+    \renewcommand{\th@titleElementScale}{0.8148}
+    \setlength{\th@titleElementUnscaledHeight}{1.227\th@titleElementHeight}
+        % =(216/176)*height
     \setlength{\th@titleElementBelow}{10mm}
     \setlength{\th@titleLogoBelow}{215.8mm} % =240-(12+12.2)
     \setlength{\th@titleTextBottom}{82mm}
@@ -108,6 +114,18 @@
     ]{titlepage/element.pdf}%
 }}
 
+\newcommand{\th@titleImage}{\put(-\th@titleBleed,\th@titleElementBelow){%
+    \begin{tikzpicture}[scale=\th@titleElementScale]
+        \clip (0, 18) -- (19.94, 18) -- (13.44, 0) -- (0, 0) -- cycle;
+        \clip (0, \th@titleElementUnscaledHeight) --
+            (21.6, \th@titleElementUnscaledHeight) --
+            (21.6, 0) -- (0, 0) -- cycle;
+        \node[anchor=south west, inner sep=0] at (0, 0) {%
+            \includegraphics[height=\th@titleElementHeight]{\th@titleImageFile}%
+        };
+    \end{tikzpicture}%
+}}
+
 % Top left corner of logo is at (12 mm, 12 mm) from top left corner of page;
 % "UiT..." name aligns with thesis title text at 27 mm from left edge.
 \newcommand{\th@titleLogo}{\put(12mm,\th@titleLogoBelow){%
@@ -118,6 +136,7 @@
 \newcommand{\thesisDepartment}[1]{\gdef\@department{#1}}
 \newcommand{\thesisSubtitle}[1]{\gdef\@subtitle{#1}}
 \newcommand{\thesisCourse}[1]{\gdef\@course{#1}}
+\newcommand{\thesisImage}[1]{\gdef\th@titleImageFile{#1}}
 
 \newcommand{\th@titleLogoFile}{english} % logo in English by default
 
@@ -137,8 +156,11 @@
         left=27mm,
         right=12mm
     }%
-    \AddToShipoutPicture*{\th@titleElement}%
-    \AddToShipoutPicture*{\th@titleLogo}%
+    \AddToShipoutPictureBG*{\th@titleElement}%
+    \ifdefined\th@titleImageFile%
+        \AddToShipoutPictureFG*{\th@titleImage}%
+    \fi%
+    \AddToShipoutPictureBG*{\th@titleLogo}%
     \begin{titlepage}%
         \setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt}%
