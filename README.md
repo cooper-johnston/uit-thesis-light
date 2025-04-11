@@ -45,6 +45,7 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
     * ``\author{}``
     * ``\thesisCourse{}`` (can enter the name of your program if there is no course code for your thesis)
     * ``\date{}``
+    
     **Optional fields:**
     * ``\thesisDepartment{}`` (*institutt*)
     * ``\thesisImage{}`` (the file name of an image to be shown on the title page)
