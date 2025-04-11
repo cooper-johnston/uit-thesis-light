@@ -27,9 +27,10 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
 
     and replace ``SECONDARY LANGUAGE`` and ``MAIN LANGUAGE`` with the languages for your document. The main language will be the language of the UiT logo on the title page and the language used in headings like "Table of Contents". The supported options are
     * ``english``, ``USenglish``, or ``UKenglish`` for English
-    * ``norsk`` for Bokmål;
-    * ``nynorsk`` for Nynorsk;
+    * ``norsk`` for Bokmål
+    * ``nynorsk`` for Nynorsk
     * ``samin`` for Northern Sami.
+
     **Loading the Babel package is required.**
 5. Recommended: Also in the preamble, load the ``stix2`` package to use the Stix Two font for body text:
     ```
@@ -45,7 +46,7 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
     * ``\author{}``
     * ``\thesisCourse{}`` (can enter the name of your program if there is no course code for your thesis)
     * ``\date{}``
-    
+
     **Optional fields:**
     * ``\thesisDepartment{}`` (*institutt*)
     * ``\thesisImage{}`` (the file name of an image to be shown on the title page)
@@ -81,3 +82,5 @@ The document class loads the following packages, in order:
 11. ``graphicx``
 12. ``hyperref``
 13. ``opensans``.
+
+The Northern Sami language is not fully defined in the ``babel`` package. If you specify Northern Sami as your document language, the document class will tell ``babel`` to use Finnish hyphenation patterns and ``csquotes`` to use Norwegian quotation marks.
