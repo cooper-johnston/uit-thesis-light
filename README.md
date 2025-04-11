@@ -37,7 +37,7 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
     ```
 
     The order of the packages can sometimes lead to errors. If you load other packages, it is a good rule of thumb to put this one last. If you run into issues, try changing the order.
-6. Also in the preamble, specify the fields for the title page.\\
+6. Also in the preamble, specify the fields for the title page.  
     **Required fields:**
         * ``\thesisFaculty{}``
         * ``\title{}``
@@ -58,7 +58,7 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
 
     \end{document}
     ```
-    
+
     See the file ``example.tex`` for more.
 8. Compile with pdfLaTeX or LuaLaTeX (pdfLaTeX is the default option on Overleaf).
 
