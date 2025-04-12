@@ -1,6 +1,8 @@
 # uit-thesis-light
 
-A simple LaTeX document class for writing a master's or PhD thesis at UiT -- The Arctic University of Norway
+A simple LaTeX document class for writing a master's or PhD thesis at UiT – The Arctic University of Norway
+
+The appearance is a recreation of the visual style of [uit-thesis](https://github.com/egraff/uit-thesis/) by Erlend Graff, following the guidelines of and using resources provided by the [UiT Visual Profile](https://uit.no/ansatte/grafiskprofil) (Norwegian). The code is written from scratch independently.
 
 Author: [Cooper Johnston](https://cooper-johnston.github.io)
 
@@ -12,7 +14,7 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
 
 ## Getting started
 
-1. Put the file ``thesis.cls`` and the directory ``titlepage/`` and all of the files inside it into the directory where you will write your thesis.
+1. Put the file ``thesis.cls`` and the directory ``titlepage/`` and all of the files inside it into the directory where you want to write your thesis.
 2. Create a ``.tex`` file for your thesis.
 3. Begin this file with the line
     ```
@@ -26,12 +28,12 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
     ```
 
     and replace ``SECONDARY LANGUAGE`` and ``MAIN LANGUAGE`` with the languages for your document. The main language will be the language of the UiT logo on the title page and the language used in headings like "Table of Contents". The supported options are
-    * ``english``, ``USenglish``, or ``UKenglish`` for English
+    * ``english``, or variants like ``USenglish`` or ``UKenglish``, for English
     * ``norsk`` for Bokmål
     * ``nynorsk`` for Nynorsk
     * ``samin`` for Northern Sami.
 
-    **Loading the Babel package is required.**
+    **Loading the ``babel`` package is required.**
 5. Recommended: Also in the preamble, load the ``stix2`` package to use the Stix Two font for body text:
     ```
     \usepackage{stix2}
