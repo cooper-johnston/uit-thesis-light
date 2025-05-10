@@ -12,12 +12,9 @@
 \setlength{\th@paperwidth}{210mm}
 \newlength{\th@paperheight}
 \setlength{\th@paperheight}{297mm}
-\newlength{\th@vmargin}
-\setlength{\th@vmargin}{100pt}
-\newlength{\th@leftmargin}
-\setlength{\th@leftmargin}{100pt}
 \newlength{\th@textwidth}
 \setlength{\th@textwidth}{360pt}
+\newcommand{\th@hmarginratio}{2:3}
 
 % Default sizes for title page; see title page section further down
 \newlength{\th@titleElementWidth}
@@ -42,9 +39,8 @@
 \DeclareOption{phd}{ % 17x24 paper
     \setlength{\th@paperwidth}{170mm}
     \setlength{\th@paperheight}{240mm}
-    \setlength{\th@vmargin}{69.35pt}
-    \setlength{\th@leftmargin}{69.35pt} % for equal left and right margins
     \setlength{\th@textwidth}{345pt}
+    \renewcommand{\th@hmarginratio}{1:1}
     \setlength{\th@titleElementWidth}{176mm}
     \setlength{\th@titleElementHeight}{135mm}
     \renewcommand{\th@titleElementScale}{0.8148}
@@ -83,12 +79,17 @@
 % Page geometry
 % =============================================================================
 
+\newlength{\th@bindingoffset}
+\setlength{\th@bindingoffset}{6mm}
+
 \geometry{
     paperwidth=\th@paperwidth,
     paperheight=\th@paperheight,
-    vmargin=\th@vmargin,
-    left=\th@leftmargin,
     textwidth=\th@textwidth,
+    vscale=0.75,
+    vmarginratio={1:1},
+    hmarginratio=\th@hmarginratio,
+    bindingoffset=\th@bindingoffset,
     headheight=14pt % makes fancyhdr stop complaining
 }
 
@@ -228,7 +229,12 @@
 
 \titleformat{\chapter}[display]
     {\normalfont\th@headingfont\huge\bfseries}
-    {\fontsize{56pt}{56pt}\selectfont\raisebox{-12pt}{\uitslash[3]}\thechapter}
+    {%
+        \vspace{-30pt}%
+        \fontsize{56pt}{56pt}\selectfont%
+        \raisebox{-12pt}{\uitslash[3]}%
+        \thechapter%
+    }
     {20pt}{\raggedright\Huge}
 \titleformat{\section}
     {\normalfont\th@headingfont\Large\bfseries}{\thesection}{1em}{}
