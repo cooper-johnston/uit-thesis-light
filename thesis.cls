@@ -13,9 +13,9 @@
 \newlength{\th@paperheight}
 \setlength{\th@paperheight}{297mm}
 \newlength{\th@vmargin}
-\setlength{\th@vmargin}{96pt}
+\setlength{\th@vmargin}{100pt}
 \newlength{\th@leftmargin}
-\setlength{\th@leftmargin}{96pt}
+\setlength{\th@leftmargin}{100pt}
 \newlength{\th@textwidth}
 \setlength{\th@textwidth}{360pt}
 
@@ -88,7 +88,8 @@
     paperheight=\th@paperheight,
     vmargin=\th@vmargin,
     left=\th@leftmargin,
-    textwidth=\th@textwidth
+    textwidth=\th@textwidth,
+    headheight=14pt % makes fancyhdr stop complaining
 }
 
 % Colors
@@ -189,7 +190,7 @@
 % Headers and footers
 % =============================================================================
 
-\newcommand{\th@hffont}{\opensans\small\fontseries{l}\selectfont}
+\newcommand{\th@hffont}{\opensans\fontseries{l}\selectfont}
 \newcommand{\th@hfformat}[1]{\th@hffont\textcolor{hfcolor}{#1}}
 
 % Chapter and section labels in header
@@ -214,8 +215,8 @@
 \fancypagestyle{standard}{
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
-    \fancyhead[LO]{\th@hfformat{\lsstyle\rightmark}}
-    \fancyhead[RE]{\th@hfformat{\lsstyle\leftmark}}
+    \fancyhead[LO]{\small\lsstyle\th@hfformat{\rightmark}}
+    \fancyhead[RE]{\small\lsstyle\th@hfformat{\leftmark}}
     \fancyhead[LE,RO]{\th@hfformat{\thepage}}
 }
 \pagestyle{standard}
