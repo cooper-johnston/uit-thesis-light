@@ -65,6 +65,7 @@
 \RequirePackage{geometry}
 \RequirePackage{emptypage}
 \RequirePackage{microtype}
+\RequirePackage{setspace}
 \RequirePackage{titlesec}
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}
@@ -107,7 +108,7 @@
 
 % element.pdf is 216x180 mm, sized for A4 paper with 3 mm bleed;
 % for PhD thesis with 170x240 mm paper, top edge of element should be cropped
-% so that element height is 135mm.
+% so that element height is 135 mm.
 \newcommand{\th@titleElement}{\put(-\th@titleBleed,\th@titleElementBelow){%
     \includegraphics[
         width=\th@titleElementWidth,
@@ -167,21 +168,23 @@
         \setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt}%
         \begin{minipage}[b][\th@titleTextBottom]{\textwidth}%
-            \raggedright\opensans%
-            {\fontseries{l}\fontsize{12pt}{16.8pt}\selectfont%
-                \@faculty\\
-                \ifdefined\@department\@department\fi\par}%
-            \vspace{10pt}%
-            {\fontseries{sb}\fontsize{15pt}{18pt}\selectfont\@title\par}%
-            \vspace{8pt}%
-            \ifdefined\@subtitle%
-                {\fontseries{m}\fontsize{13pt}{15.6pt}\selectfont%
-                    \@subtitle\par}%
-            \fi%
-            \vspace{8pt}%
-            {\fontseries{l}\fontsize{11pt}{15.4pt}\selectfont%
-                \@author\\
-                \@course, \@date\par}%
+            \begin{singlespace}%
+                \raggedright\opensans%
+                {\fontseries{l}\fontsize{12pt}{16.8pt}\selectfont%
+                    \@faculty\\
+                    \ifdefined\@department\@department\fi\par}%
+                \vspace{10pt}%
+                {\fontseries{sb}\fontsize{15pt}{18pt}\selectfont\@title\par}%
+                \vspace{8pt}%
+                \ifdefined\@subtitle%
+                    {\fontseries{m}\fontsize{13pt}{15.6pt}\selectfont%
+                        \@subtitle\par}%
+                \fi%
+                \vspace{8pt}%
+                {\fontseries{l}\fontsize{11pt}{15.4pt}\selectfont%
+                    \@author\\
+                    \@course, \@date\par}%
+            \end{singlespace}%
         \end{minipage}%
     \end{titlepage}
     \restoregeometry
@@ -196,13 +199,13 @@
 
 % Chapter and section labels in header
 \renewcommand{\sectionmark}[1]{\markright{%
-    \thesection\hspace{1ex}\uitslash[0.25]\hspace{1ex}%
+    \thesection\hspace{1ex}\raisebox{-0.25pt}{\uitslash[0.25]}\hspace{1ex}%
     \MakeUppercase{#1}%
 }}
 \renewcommand{\chaptermark}[1]{\markboth{%
     \if@mainmatter%
         \MakeUppercase{\@chapapp}\ \thechapter%
-        \hspace{1ex}\uitslash[0.25]\hspace{1ex}%
+        \hspace{1ex}\raisebox{-0.25pt}{\uitslash[0.25]}\hspace{1ex}%
     \fi%
     \MakeUppercase{#1}%
 }{}}
@@ -228,14 +231,14 @@
 \newcommand{\th@headingfont}{\opensans}
 
 \titleformat{\chapter}[display]
-    {\normalfont\th@headingfont\huge\bfseries}
+    {\begin{singlespace}\normalfont\th@headingfont\huge\bfseries}
     {%
         \vspace{-30pt}%
         \fontsize{56pt}{56pt}\selectfont%
         \raisebox{-12pt}{\uitslash[3]}%
         \thechapter%
     }
-    {20pt}{\raggedright\Huge}
+    {20pt}{\raggedright\Huge}[\end{singlespace}]
 \titleformat{\section}
     {\normalfont\th@headingfont\Large\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}
@@ -264,3 +267,5 @@
 
 % Norwegian-style quotes for Northern Sami with csquotes package
 \DeclareQuoteAlias[guillemets]{norwegian}{samin}
+
+\setstretch{1.1} % 1.2*1.1 = 1.32 line spacing

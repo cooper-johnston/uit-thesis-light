@@ -75,14 +75,15 @@ The document class loads the following packages, in order:
 2. ``geometry``
 3. ``emptypage``
 4. ``microtype``
-5. ``titlesec``
-6. ``fancyhdr``
-7. ``xcolor``
-8. ``tikz``
-9. ``csquotes``
-10. ``eso-pic``
-11. ``graphicx``
-12. ``hyperref``
-13. ``opensans``.
+5. ``setspace``
+6. ``titlesec``
+7. ``fancyhdr``
+8. ``xcolor``
+9. ``tikz``
+10. ``csquotes``
+11. ``eso-pic``
+12. ``graphicx``
+13. ``hyperref``
+14. ``opensans``.
 
 The Northern Sami language is not fully defined in the ``babel`` package. If you specify Northern Sami as your document language, the document class will tell ``babel`` to use Finnish hyphenation patterns and ``csquotes`` to use Norwegian quotation marks.
