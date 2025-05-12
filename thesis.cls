@@ -26,8 +26,6 @@
 \setlength{\th@titleElementUnscaledHeight}{\th@titleElementHeight}
 \newlength{\th@titleElementBelow}
 \setlength{\th@titleElementBelow}{12mm}
-\newlength{\th@titleLogoBelow}
-\setlength{\th@titleLogoBelow}{272.8mm} % =297-(12+12.2)
 \newlength{\th@titleTextBottom}
 \setlength{\th@titleTextBottom}{89.5mm}
 
@@ -47,7 +45,6 @@
     \setlength{\th@titleElementUnscaledHeight}{1.227\th@titleElementHeight}
         % =(216/176)*height
     \setlength{\th@titleElementBelow}{10mm}
-    \setlength{\th@titleLogoBelow}{215.8mm} % =240-(12+12.2)
     \setlength{\th@titleTextBottom}{82mm}
     \renewcommand{\th@fontsize}{10pt}
 }
@@ -80,18 +77,15 @@
 % Page geometry
 % =============================================================================
 
-\newlength{\th@bindingoffset}
-\setlength{\th@bindingoffset}{6mm}
-
 \geometry{
+    % showframe,
     paperwidth=\th@paperwidth,
     paperheight=\th@paperheight,
     textwidth=\th@textwidth,
     vscale=0.75,
     vmarginratio={1:1},
     hmarginratio=\th@hmarginratio,
-    bindingoffset=\th@bindingoffset,
-    headheight=14pt % makes fancyhdr stop complaining
+    headheight=14pt, % makes fancyhdr stop complaining
 }
 
 % Colors
@@ -105,6 +99,11 @@
 
 \newlength{\th@titleBleed}
 \setlength{\th@titleBleed}{3mm}
+
+% Calculate space from bottom of logo to bottom of page
+\newlength{\th@titleLogoBelow}
+\setlength{\th@titleLogoBelow}{\th@paperheight}
+\addtolength{\th@titleLogoBelow}{-24.2mm} % space from page top to logo bottom
 
 % element.pdf is 216x180 mm, sized for A4 paper with 3 mm bleed;
 % for PhD thesis with 170x240 mm paper, top edge of element should be cropped
