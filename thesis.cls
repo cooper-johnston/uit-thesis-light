@@ -49,6 +49,10 @@
     \renewcommand{\th@fontsize}{10pt}
 }
 
+% `bleed` option adds 3 mm bleed for professional printing
+\newif{\ifth@bleedenabled}
+\DeclareOption{bleed}{\th@bleedenabledtrue}
+
 % Suppress remaining book class options
 \DeclareOption*{\OptionNotUsed}
 
@@ -77,10 +81,29 @@
 % Page geometry
 % =============================================================================
 
+% Set layout dimensions to paper dimensions without bleed
+\newlength{\th@layoutwidth}
+\setlength{\th@layoutwidth}{\th@paperwidth}
+\newlength{\th@layoutheight}
+\setlength{\th@layoutheight}{\th@paperheight}
+
+\newlength{\th@bleed}
+\setlength{\th@bleed}{0mm}
+
+% Add 3 mm bleed to paper dimensions if `bleed` option is chosen
+\ifth@bleedenabled
+    \setlength{\th@bleed}{3mm}
+    \addtolength{\th@paperwidth}{2\th@bleed}
+    \addtolength{\th@paperheight}{2\th@bleed}
+\fi
+
 \geometry{
     % showframe,
     paperwidth=\th@paperwidth,
     paperheight=\th@paperheight,
+    layoutwidth=\th@layoutwidth,
+    layoutheight=\th@layoutheight,
+    layoutoffset=\th@bleed,
     textwidth=\th@textwidth,
     vscale=0.75,
     vmarginratio={1:1},
@@ -97,40 +120,56 @@
 % Title page
 % =============================================================================
 
-\newlength{\th@titleBleed}
-\setlength{\th@titleBleed}{3mm}
+% Title element image is 216x180 mm, sized for A4 paper with 3 mm bleed;
+% when printing without bleed, the left edge of the title element should be
+% 3 mm outside the left edge of the paper.
+\newlength{\th@titleElementHOffset}
+\setlength{\th@titleElementHOffset}{3mm}
+\addtolength{\th@titleElementHOffset}{-\th@bleed}
+    % resets offset to 0 mm when printing with bleed
+
+\addtolength{\th@titleElementBelow}{\th@bleed}
+
+% For PhD thesis with 170x240 mm paper, top edge of element should be cropped
+% so that element height is 135 mm.
+\newcommand{\th@titleElement}{%
+    \put(-\th@titleElementHOffset,\th@titleElementBelow){%
+        \includegraphics[
+            width=\th@titleElementWidth,
+            viewport=0mm 0mm 216mm \th@titleElementUnscaledHeight,
+            clip
+        ]{titlepage/element.pdf}%
+    }%
+}
+
+\newcommand{\th@titleImage}{%
+    \put(-\th@titleElementHOffset,\th@titleElementBelow){%
+        \begin{tikzpicture}[scale=\th@titleElementScale]
+            \clip (0, 18) -- (19.94, 18) -- (13.44, 0) -- (0, 0) -- cycle;
+            \clip (0, \th@titleElementUnscaledHeight) --
+                (21.6, \th@titleElementUnscaledHeight) --
+                (21.6, 0) -- (0, 0) -- cycle;
+            \node[anchor=south west, inner sep=0] at (0, 0) {%
+                \includegraphics[height=\th@titleElementHeight]%
+                    {\th@titleImageFile}%
+            };
+        \end{tikzpicture}%
+    }%
+}
+
+% Top left corner of logo is at (12 mm, 12 mm) from top left corner of layout;
+% "UiT..." name aligns with thesis title text at 27 mm from left edge.
+\newlength{\th@titleLogoLeft}
+\setlength{\th@titleLogoLeft}{\th@bleed} % left edge of paper
+\addtolength{\th@titleLogoLeft}{12mm} % left edge of logo
 
 % Calculate space from bottom of logo to bottom of page
 \newlength{\th@titleLogoBelow}
-\setlength{\th@titleLogoBelow}{\th@paperheight}
-\addtolength{\th@titleLogoBelow}{-24.2mm} % space from page top to logo bottom
+\setlength{\th@titleLogoBelow}{\th@paperheight} % top edge of paper
+\addtolength{\th@titleLogoBelow}{-\th@bleed} % top edge of layout
+\addtolength{\th@titleLogoBelow}{-24.2mm} % bottom edge of logo
 
-% element.pdf is 216x180 mm, sized for A4 paper with 3 mm bleed;
-% for PhD thesis with 170x240 mm paper, top edge of element should be cropped
-% so that element height is 135 mm.
-\newcommand{\th@titleElement}{\put(-\th@titleBleed,\th@titleElementBelow){%
-    \includegraphics[
-        width=\th@titleElementWidth,
-        viewport=0mm 0mm 216mm \th@titleElementUnscaledHeight,
-        clip
-    ]{titlepage/element.pdf}%
-}}
-
-\newcommand{\th@titleImage}{\put(-\th@titleBleed,\th@titleElementBelow){%
-    \begin{tikzpicture}[scale=\th@titleElementScale]
-        \clip (0, 18) -- (19.94, 18) -- (13.44, 0) -- (0, 0) -- cycle;
-        \clip (0, \th@titleElementUnscaledHeight) --
-            (21.6, \th@titleElementUnscaledHeight) --
-            (21.6, 0) -- (0, 0) -- cycle;
-        \node[anchor=south west, inner sep=0] at (0, 0) {%
-            \includegraphics[height=\th@titleElementHeight]{\th@titleImageFile}%
-        };
-    \end{tikzpicture}%
-}}
-
-% Top left corner of logo is at (12 mm, 12 mm) from top left corner of page;
-% "UiT..." name aligns with thesis title text at 27 mm from left edge.
-\newcommand{\th@titleLogo}{\put(12mm,\th@titleLogoBelow){%
+\newcommand{\th@titleLogo}{\put(\th@titleLogoLeft,\th@titleLogoBelow){%
     \includegraphics[height=12.2mm]{titlepage/logo_\th@titleLogoFile.pdf}%
 }}
 
@@ -150,8 +189,9 @@
     \iflanguage{samin}{\renewcommand{\th@titleLogoFile}{samin}}{}}}%
     %
     \newgeometry{
-        % layoutwidth=\th@paperwidth,
-        % layoutheight=\th@paperheight,
+        layoutwidth=\th@layoutwidth,
+        layoutheight=\th@layoutheight,
+        layoutoffset=\th@bleed,
         ignorehead,
         ignorefoot,
         top=0mm,
@@ -262,9 +302,10 @@
 
 \frenchspacing % one space after period between sentences
 
-\raggedbottom
+\raggedbottom % stops stretching of paragraphs to make text reach page bottom
 
 % Norwegian-style quotes for Northern Sami with csquotes package
 \DeclareQuoteAlias[guillemets]{norwegian}{samin}
 
-\setstretch{1.1} % 1.2*1.1 = 1.32 line spacing
+% Default line spacing is 1.2; stretching by 1.1 gives 1.32 spacing.
+\setstretch{1.1}
