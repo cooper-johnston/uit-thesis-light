@@ -72,10 +72,11 @@
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}
 \RequirePackage{tikz}
+\RequirePackage{babel}
 \RequirePackage{csquotes}
 \RequirePackage{eso-pic}
 \RequirePackage{graphicx}
-\RequirePackage[hidelinks]{hyperref}
+\RequirePackage[pdfusetitle,hidelinks]{hyperref}
 \RequirePackage[defaultsans,scale=0.92]{opensans}
     % scaled for more compatible x-height with most serif body text fonts
 
