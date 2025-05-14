@@ -2,7 +2,7 @@
 
 A simple LaTeX document class for writing a master's or PhD thesis at UiT – The Arctic University of Norway
 
-The appearance is a recreation of the visual style of [uit-thesis](https://github.com/egraff/uit-thesis/) by Erlend Graff, following the guidelines of and using resources provided by the [UiT Visual Profile](https://uit.no/ansatte/grafiskprofil) (Norwegian). The code is written from scratch independently.
+The appearance is largely a recreation of the visual style of [uit-thesis](https://github.com/egraff/uit-thesis/) by Erlend Graff, with some of my own adjustments, following the guidelines of and using resources provided by the [UiT Visual Profile](https://uit.no/ansatte/grafiskprofil) (Norwegian). The code is written from scratch independently.
 
 Author: [Cooper Johnston](https://cooper-johnston.github.io)
 
@@ -61,10 +61,10 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
 ### Language support
 
 The language you specify as the main document language will be the language of the UiT logo on the title page and the language used in headings like “Table of Contents”. The supported options are
-    * ``english``, or variants like ``USenglish`` or ``UKenglish``, for English
-    * ``norsk`` for Bokmål
-    * ``nynorsk`` for Nynorsk
-    * ``samin`` for Northern Sami.
+* ``english``, or variants like ``USenglish`` or ``UKenglish``, for English
+* ``norsk`` for Bokmål
+* ``nynorsk`` for Nynorsk
+* ``samin`` for Northern Sami.
 
 The Northern Sami language is not fully defined in the ``babel`` package. If you specify Northern Sami as your document language, the document class will tell ``babel`` to use Finnish hyphenation patterns and ``csquotes`` to use Norwegian quotation marks.
 
