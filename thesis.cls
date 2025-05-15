@@ -76,7 +76,7 @@
 \RequirePackage{csquotes}
 \RequirePackage{eso-pic}
 \RequirePackage{graphicx}
-\RequirePackage[pdfusetitle,hidelinks]{hyperref}
+\RequirePackage[pdfusetitle,bookmarksnumbered,hidelinks]{hyperref}
 \RequirePackage[defaultsans,scale=0.92]{opensans}
     % scaled for more compatible x-height with most serif body text fonts
 
@@ -363,7 +363,7 @@
 % Table of contents
 % =============================================================================
 
-\setcounter{tocdepth}{0}
+\setcounter{tocdepth}{1}
 
 \titlecontents{chapter} % section
     [0em] % left
@@ -371,7 +371,31 @@
     {{\bfseries\contentslabel{0em}}\hspace{1.75em}} % numbered entry format
     {\hspace{1.75em}} % numberless entry format
     {\hspace{1em}\contentspage} % filler-page format
-    [\vspace{\baselineskip}] % below code
+    [\vspace{0.5\baselineskip}] % below code
+
+\titlecontents{section} % section
+    [1.75em] % left
+    {\normalfont} % above code
+    {\contentslabel{0em}\hspace{2em}} % numbered entry format
+    {\hspace{2em}} % numberless entry format
+    {\hspace{1em}\contentspage} % filler-page format
+    [\vspace{0.5\baselineskip}] % below code
+
+\titlecontents{figure} % section
+    [2.5em] % left
+    {\normalfont} % above code
+    {\contentslabel{2.5em}} % numbered entry format
+    {} % numberless entry format
+    {\titlerule*[8pt]{.}\contentspage} % filler-page format
+    [\vspace{0.5\baselineskip}] % below code
+
+\titlecontents{table} % section
+    [2.5em] % left
+    {\normalfont} % above code
+    {\contentslabel{2.5em}} % numbered entry format
+    {} % numberless entry format
+    {\titlerule*[8pt]{.}\contentspage} % filler-page format
+    [\vspace{0.5\baselineskip}] % below code
 
 % Miscellaneous
 % =============================================================================
