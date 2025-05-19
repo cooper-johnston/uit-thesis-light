@@ -79,6 +79,7 @@ The ``master`` option uses A4 paper and 11 pt font, while the ``phd`` option use
 There are two options for the chapter heading style:
 * ``classicchapters`` (default) prints chapter headings in the style of [uit-thesis](https://github.com/egraff/uit-thesis/) by Erlend Graff.
 * ``marginchapters`` puts the chapter number in the right margin instead of above the chapter name.
+
 Both include the blue/turqiouse UiT slash before the chapter number.
 
 ### Required packages
