@@ -14,11 +14,11 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
 
 ## Getting started
 
-1. Put the file ``thesis.cls`` and the directory ``titlepage/`` and all of the files inside it into the directory where you want to write your thesis.
+1. Put the file ``uit-thesis-light.cls`` and the directory ``titlepage/`` and all of the files inside it into the directory where you want to write your thesis.
 2. Create a ``.tex`` file for your thesis.
 3. Begin this file with the line
     ```
-    \documentclass[SECOND LANGUAGE,MAIN LANGUAGE,THESIS TYPE]{thesis}
+    \documentclass[SECOND LANGUAGE,MAIN LANGUAGE,THESIS TYPE]{uit-thesis-light}
     ```
 
     Replace ``SECOND LANGUAGE`` and ``MAIN LANGUAGE`` with the languages for your document; it is possible to have only one or more than two, but the main language must always come last. See [Language support](#language-support) for more info.
@@ -60,6 +60,8 @@ Repository: [https://github.com/cooper-johnston/uit-thesis-light](https://github
 
 ### Language support
 
+The language options you specify when selecting the document class must be the first options specified. For example, the options ``master`` or ``phd`` must come after the main language.
+
 The language you specify as the main document language will be the language of the UiT logo on the title page and the language used in headings like “Table of Contents”. The supported options are
 * ``english``, or variants like ``USenglish`` or ``UKenglish``, for English
 * ``norsk`` for Bokmål
@@ -71,6 +73,13 @@ The Northern Sami language is not fully defined in the ``babel`` package. If you
 ### Paper and font sizes
 
 The ``master`` option uses A4 paper and 11 pt font, while the ``phd`` option uses 17x24 cm paper and 10 pt font.
+
+### Chapter heading options
+
+There are two options for the chapter heading style:
+* ``classicchapters`` (default) prints chapter headings in the style of [uit-thesis](https://github.com/egraff/uit-thesis/) by Erlend Graff.
+* ``marginchapters`` puts the chapter number in the right margin instead of above the chapter name.
+Both include the blue/turqiouse UiT slash before the chapter number.
 
 ### Required packages
 

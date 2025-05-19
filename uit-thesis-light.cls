@@ -1,70 +1,70 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{thesis}[Thesis Class]
+\ProvidesClass{uit-thesis-light}[2025/05/19 UiT Thesis Document Class by Cooper Johnston]
 
 % Base class and options
 % =============================================================================
 
 % Base class
-\newcommand{\th@baseclass}{book}
+\newcommand{\utl@baseclass}{book}
 
 % Default paper size and margins (A4)
-\newlength{\th@paperwidth}
-\setlength{\th@paperwidth}{210mm}
-\newlength{\th@paperheight}
-\setlength{\th@paperheight}{297mm}
-\newlength{\th@textwidth}
-\setlength{\th@textwidth}{360pt}
-\newcommand{\th@hmarginratio}{2:3}
+\newlength{\utl@paperwidth}
+\setlength{\utl@paperwidth}{210mm}
+\newlength{\utl@paperheight}
+\setlength{\utl@paperheight}{297mm}
+\newlength{\utl@textwidth}
+\setlength{\utl@textwidth}{360pt}
+\newcommand{\utl@hmarginratio}{2:3}
 
 % Default sizes for title page; see title page section further down
-\newlength{\th@titleElementWidth}
-\setlength{\th@titleElementWidth}{216mm}
-\newlength{\th@titleElementHeight}
-\setlength{\th@titleElementHeight}{180mm}
-\newcommand{\th@titleElementScale}{1}
-\newlength{\th@titleElementUnscaledHeight}
-\setlength{\th@titleElementUnscaledHeight}{\th@titleElementHeight}
-\newlength{\th@titleElementBelow}
-\setlength{\th@titleElementBelow}{12mm}
-\newlength{\th@titleTextBottom}
-\setlength{\th@titleTextBottom}{89.5mm}
+\newlength{\utl@titleElementWidth}
+\setlength{\utl@titleElementWidth}{216mm}
+\newlength{\utl@titleElementHeight}
+\setlength{\utl@titleElementHeight}{180mm}
+\newcommand{\utl@titleElementScale}{1}
+\newlength{\utl@titleElementUnscaledHeight}
+\setlength{\utl@titleElementUnscaledHeight}{\utl@titleElementHeight}
+\newlength{\utl@titleElementBelow}
+\setlength{\utl@titleElementBelow}{12mm}
+\newlength{\utl@titleTextBottom}
+\setlength{\utl@titleTextBottom}{89.5mm}
 
 % Default font size
-\newcommand{\th@fontsize}{11pt}
+\newcommand{\utl@fontsize}{11pt}
 
 % Thesis type options
 \DeclareOption{master}{} % default
 \DeclareOption{phd}{ % 17x24 paper and 10 pt font
-    \setlength{\th@paperwidth}{170mm}
-    \setlength{\th@paperheight}{240mm}
-    \setlength{\th@textwidth}{345pt}
-    \renewcommand{\th@hmarginratio}{1:1}
-    \setlength{\th@titleElementWidth}{176mm}
-    \setlength{\th@titleElementHeight}{135mm}
-    \renewcommand{\th@titleElementScale}{0.8148}
-    \setlength{\th@titleElementUnscaledHeight}{1.227\th@titleElementHeight}
+    \setlength{\utl@paperwidth}{170mm}
+    \setlength{\utl@paperheight}{240mm}
+    \setlength{\utl@textwidth}{345pt}
+    \renewcommand{\utl@hmarginratio}{1:1}
+    \setlength{\utl@titleElementWidth}{176mm}
+    \setlength{\utl@titleElementHeight}{135mm}
+    \renewcommand{\utl@titleElementScale}{0.8148}
+    \setlength{\utl@titleElementUnscaledHeight}{1.227\utl@titleElementHeight}
         % =(216/176)*height
-    \setlength{\th@titleElementBelow}{10mm}
-    \setlength{\th@titleTextBottom}{82mm}
-    \renewcommand{\th@fontsize}{10pt}
+    \setlength{\utl@titleElementBelow}{10mm}
+    \setlength{\utl@titleTextBottom}{82mm}
+    \renewcommand{\utl@fontsize}{10pt}
 }
 
 % `bleed` option adds 3 mm bleed for professional printing
-\newif{\ifth@bleedenabled}
-\DeclareOption{bleed}{\th@bleedenabledtrue}
+\newif{\ifutl@bleedenabled}
+\DeclareOption{bleed}{\utl@bleedenabledtrue}
 
 % Chapter heading style options
-\newif{\ifth@marginchapters}
+\newif{\ifutl@marginchapters}
 \DeclareOption{classicchapters}{} % default
 \DeclareOption{marginchapters}{ % chapter numbers in right margin
-    \th@marginchapterstrue
+    \utl@marginchapterstrue
 }
 
 % Suppress remaining book class options
 \DeclareOption*{\OptionNotUsed}
 
 \ProcessOptions\relax
-\LoadClass[\th@fontsize]{\th@baseclass}
+\LoadClass[\utl@fontsize]{\utl@baseclass}
 
 % Packages
 % =============================================================================
@@ -74,7 +74,7 @@
 \RequirePackage{emptypage}
 \RequirePackage{microtype}
 \RequirePackage{setspace}
-\RequirePackage[\ifth@marginchapters rigidchapters\fi]{titlesec}
+\RequirePackage[\ifutl@marginchapters rigidchapters\fi]{titlesec}
 \RequirePackage{titletoc}
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}
@@ -91,32 +91,32 @@
 % =============================================================================
 
 % Set layout dimensions to paper dimensions without bleed
-\newlength{\th@layoutwidth}
-\setlength{\th@layoutwidth}{\th@paperwidth}
-\newlength{\th@layoutheight}
-\setlength{\th@layoutheight}{\th@paperheight}
+\newlength{\utl@layoutwidth}
+\setlength{\utl@layoutwidth}{\utl@paperwidth}
+\newlength{\utl@layoutheight}
+\setlength{\utl@layoutheight}{\utl@paperheight}
 
-\newlength{\th@bleed}
-\setlength{\th@bleed}{0mm}
+\newlength{\utl@bleed}
+\setlength{\utl@bleed}{0mm}
 
 % Add 3 mm bleed to paper dimensions if `bleed` option is chosen
-\ifth@bleedenabled
-    \setlength{\th@bleed}{3mm}
-    \addtolength{\th@paperwidth}{2\th@bleed}
-    \addtolength{\th@paperheight}{2\th@bleed}
+\ifutl@bleedenabled
+    \setlength{\utl@bleed}{3mm}
+    \addtolength{\utl@paperwidth}{2\utl@bleed}
+    \addtolength{\utl@paperheight}{2\utl@bleed}
 \fi
 
 \geometry{
     % showframe,
-    paperwidth=\th@paperwidth,
-    paperheight=\th@paperheight,
-    layoutwidth=\th@layoutwidth,
-    layoutheight=\th@layoutheight,
-    layoutoffset=\th@bleed,
-    textwidth=\th@textwidth,
+    paperwidth=\utl@paperwidth,
+    paperheight=\utl@paperheight,
+    layoutwidth=\utl@layoutwidth,
+    layoutheight=\utl@layoutheight,
+    layoutoffset=\utl@bleed,
+    textwidth=\utl@textwidth,
     vscale=0.75,
     vmarginratio={1:1},
-    hmarginratio=\th@hmarginratio,
+    hmarginratio=\utl@hmarginratio,
     headheight=30pt, % good for up to two header lines
 }
 
@@ -149,35 +149,35 @@
 % Title element image is 216x180 mm, sized for A4 paper with 3 mm bleed;
 % when printing without bleed, the left edge of the title element should be
 % 3 mm outside the left edge of the paper.
-\newlength{\th@titleElementHOffset}
-\setlength{\th@titleElementHOffset}{3mm}
-\addtolength{\th@titleElementHOffset}{-\th@bleed}
+\newlength{\utl@titleElementHOffset}
+\setlength{\utl@titleElementHOffset}{3mm}
+\addtolength{\utl@titleElementHOffset}{-\utl@bleed}
     % resets offset to 0 mm when printing with bleed
 
-\addtolength{\th@titleElementBelow}{\th@bleed}
+\addtolength{\utl@titleElementBelow}{\utl@bleed}
 
 % For PhD thesis with 170x240 mm paper, top edge of element should be cropped
 % so that element height is 135 mm.
-\newcommand{\th@titleElement}{%
-    \put(-\th@titleElementHOffset,\th@titleElementBelow){%
+\newcommand{\utl@titleElement}{%
+    \put(-\utl@titleElementHOffset,\utl@titleElementBelow){%
         \includegraphics[
-            width=\th@titleElementWidth,
-            viewport=0mm 0mm 216mm \th@titleElementUnscaledHeight,
+            width=\utl@titleElementWidth,
+            viewport=0mm 0mm 216mm \utl@titleElementUnscaledHeight,
             clip
         ]{titlepage/element.pdf}%
     }%
 }
 
-\newcommand{\th@titleImage}{%
-    \put(-\th@titleElementHOffset,\th@titleElementBelow){%
-        \begin{tikzpicture}[scale=\th@titleElementScale]
+\newcommand{\utl@titleImage}{%
+    \put(-\utl@titleElementHOffset,\utl@titleElementBelow){%
+        \begin{tikzpicture}[scale=\utl@titleElementScale]
             \clip (0, 18) -- (19.94, 18) -- (13.44, 0) -- (0, 0) -- cycle;
-            \clip (0, \th@titleElementUnscaledHeight) --
-                (21.6, \th@titleElementUnscaledHeight) --
+            \clip (0, \utl@titleElementUnscaledHeight) --
+                (21.6, \utl@titleElementUnscaledHeight) --
                 (21.6, 0) -- (0, 0) -- cycle;
             \node[anchor=south west, inner sep=0] at (0, 0) {%
-                \includegraphics[height=\th@titleElementHeight]%
-                    {\th@titleImageFile}%
+                \includegraphics[height=\utl@titleElementHeight]%
+                    {\utl@titleImageFile}%
             };
         \end{tikzpicture}%
     }%
@@ -185,54 +185,54 @@
 
 % Top left corner of logo is at (12 mm, 12 mm) from top left corner of layout;
 % "UiT..." name aligns with thesis title text at 27 mm from left edge.
-\newlength{\th@titleLogoLeft}
-\setlength{\th@titleLogoLeft}{\th@bleed} % left edge of paper
-\addtolength{\th@titleLogoLeft}{12mm} % left edge of logo
+\newlength{\utl@titleLogoLeft}
+\setlength{\utl@titleLogoLeft}{\utl@bleed} % left edge of paper
+\addtolength{\utl@titleLogoLeft}{12mm} % left edge of logo
 
 % Calculate space from bottom of logo to bottom of page
-\newlength{\th@titleLogoBelow}
-\setlength{\th@titleLogoBelow}{\th@paperheight} % top edge of paper
-\addtolength{\th@titleLogoBelow}{-\th@bleed} % top edge of layout
-\addtolength{\th@titleLogoBelow}{-24.2mm} % bottom edge of logo
+\newlength{\utl@titleLogoBelow}
+\setlength{\utl@titleLogoBelow}{\utl@paperheight} % top edge of paper
+\addtolength{\utl@titleLogoBelow}{-\utl@bleed} % top edge of layout
+\addtolength{\utl@titleLogoBelow}{-24.2mm} % bottom edge of logo
 
-\newcommand{\th@titleLogo}{\put(\th@titleLogoLeft,\th@titleLogoBelow){%
-    \includegraphics[height=12.2mm]{titlepage/logo_\th@titleLogoFile.pdf}%
+\newcommand{\utl@titleLogo}{\put(\utl@titleLogoLeft,\utl@titleLogoBelow){%
+    \includegraphics[height=12.2mm]{titlepage/logo_\utl@titleLogoFile.pdf}%
 }}
 
 \newcommand{\thesisFaculty}[1]{\gdef\@faculty{#1}}
 \newcommand{\thesisDepartment}[1]{\gdef\@department{#1}}
 \newcommand{\thesisSubtitle}[1]{\gdef\@subtitle{#1}}
 \newcommand{\thesisCourse}[1]{\gdef\@course{#1}}
-\newcommand{\thesisImage}[1]{\gdef\th@titleImageFile{#1}}
+\newcommand{\thesisImage}[1]{\gdef\utl@titleImageFile{#1}}
 
-\newcommand{\th@titleLogoFile}{english} % logo in English by default
+\newcommand{\utl@titleLogoFile}{english} % logo in English by default
 
 \renewcommand{\maketitle}{%
     \babelprovide[hyphenrules=finnish]{samin}% initializing Northern Sami
     % Detect document language to select appropriate logo
-    \iflanguage{norsk}{\renewcommand{\th@titleLogoFile}{bokmål}}{%
-    \iflanguage{nynorsk}{\renewcommand{\th@titleLogoFile}{nynorsk}}{%
-    \iflanguage{samin}{\renewcommand{\th@titleLogoFile}{samin}}{}}}%
+    \iflanguage{norsk}{\renewcommand{\utl@titleLogoFile}{bokmål}}{%
+    \iflanguage{nynorsk}{\renewcommand{\utl@titleLogoFile}{nynorsk}}{%
+    \iflanguage{samin}{\renewcommand{\utl@titleLogoFile}{samin}}{}}}%
     %
     \newgeometry{
-        layoutwidth=\th@layoutwidth,
-        layoutheight=\th@layoutheight,
-        layoutoffset=\th@bleed,
+        layoutwidth=\utl@layoutwidth,
+        layoutheight=\utl@layoutheight,
+        layoutoffset=\utl@bleed,
         ignorehead,
         ignorefoot,
         top=0mm,
         left=27mm,
         right=12mm
     }%
-    \AddToShipoutPictureBG*{\th@titleElement}%
-    \ifdefined\th@titleImageFile%
-        \AddToShipoutPictureFG*{\th@titleImage}%
+    \AddToShipoutPictureBG*{\utl@titleElement}%
+    \ifdefined\utl@titleImageFile%
+        \AddToShipoutPictureFG*{\utl@titleImage}%
     \fi%
-    \AddToShipoutPictureBG*{\th@titleLogo}%
+    \AddToShipoutPictureBG*{\utl@titleLogo}%
     \begin{titlepage}%
         \setlength{\parindent}{0pt}%
         \setlength{\parskip}{0pt}%
-        \begin{minipage}[b][\th@titleTextBottom]{\textwidth}%
+        \begin{minipage}[b][\utl@titleTextBottom]{\textwidth}%
             \begin{singlespace}%
                 \raggedright\opensans%
                 {\fontseries{l}\fontsize{12pt}{16.8pt}\selectfont%
@@ -259,75 +259,75 @@
 % Headers and footers
 % =============================================================================
 
-\newcommand{\th@hffont}{\opensans\fontseries{l}\selectfont}
-\newcommand{\th@hfformat}[1]{\th@hffont\textcolor{hfcolor}{#1}}
+\newcommand{\utl@hffont}{\opensans\fontseries{l}\selectfont}
+\newcommand{\utl@hfformat}[1]{\utl@hffont\textcolor{hfcolor}{#1}}
 
 % Inline UiT slash with space around it
-\newcommand{\th@uitslashsep}[1][0.25]
+\newcommand{\utl@uitslashsep}[1][0.25]
     {\hspace{0.6em}\raisebox{-0.25pt}{\uitslash{#1}}\hspace{0.6em}}
 
 % Chapter and section labels in header
 \renewcommand{\sectionmark}[1]
-    {\markright{\thesection\th@uitslashsep\MakeUppercase{#1}}}
+    {\markright{\thesection\utl@uitslashsep\MakeUppercase{#1}}}
 \renewcommand{\chaptermark}[1]{\markboth{%
-    \if@mainmatter\MakeUppercase{\@chapapp}\ \thechapter\th@uitslashsep\fi%
+    \if@mainmatter\MakeUppercase{\@chapapp}\ \thechapter\utl@uitslashsep\fi%
     \MakeUppercase{#1}%
 }{}}
 
 \fancypagestyle{plain}{
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
-    \fancyfoot[C]{\th@hfformat{\thepage}}
+    \fancyfoot[C]{\utl@hfformat{\thepage}}
 }
 
 \fancypagestyle{standard}{
     \fancyhf{}
     \renewcommand{\headrulewidth}{0pt}
-    \fancyhead[LO]{\small\lsstyle\th@hfformat{\rightmark}}
-    \fancyhead[RE]{\small\lsstyle\th@hfformat{\leftmark}}
-    \fancyhead[LE,RO]{\th@hfformat{\thepage}}
+    \fancyhead[LO]{\small\lsstyle\utl@hfformat{\rightmark}}
+    \fancyhead[RE]{\small\lsstyle\utl@hfformat{\leftmark}}
+    \fancyhead[LE,RO]{\utl@hfformat{\thepage}}
 }
 \pagestyle{standard}
 
 % Headings
 % =============================================================================
 
-\newcommand{\th@headingfont}{\opensans\bfseries}
+\newcommand{\utl@headingfont}{\opensans\bfseries}
 
-\ifth@marginchapters % `marginchapters` option
+\ifutl@marginchapters % `marginchapters` option
     % Right edge of chapter number, from left edge of text column
-    \newlength{\th@chapternumberoffset}
-    \setlength{\th@chapternumberoffset}{\th@textwidth}
-    \addtolength{\th@chapternumberoffset}{36pt}
+    \newlength{\utl@chapternumberoffset}
+    \setlength{\utl@chapternumberoffset}{\utl@textwidth}
+    \addtolength{\utl@chapternumberoffset}{36pt}
 
     % Chapter titles won't extend past 3/4 of text width
-    \newcommand{\th@chaptertitlebox}[1]{%
-        \begin{minipage}[t]{0.75\th@textwidth}%
+    \newcommand{\utl@chaptertitlebox}[1]{%
+        \begin{minipage}[t]{0.75\utl@textwidth}%
             \raggedright\Huge #1%
         \end{minipage}%
     }
 
     \titleformat{\chapter}[block]
-        {\begin{singlespace}\normalfont\th@headingfont\huge}
-        {\rlap{\begin{minipage}[t]{\th@chapternumberoffset}%
+        {\begin{singlespace}\normalfont\utl@headingfont\huge}
+        {\rlap{\begin{minipage}[t]{\utl@chapternumberoffset}%
             \vspace{-36pt}%
-            \hspace{\th@chapternumberoffset}%
+            \hspace{\utl@chapternumberoffset}%
             \raggedleft%
             \fontsize{56pt}{56pt}\selectfont%
             \smash{\raisebox{-18pt}{\uitslash{3}}}%
             \thechapter%
         \end{minipage}}}
         {0pt}
-        {\th@chaptertitlebox}
+        {\utl@chaptertitlebox}
         [\end{singlespace}]
 
 
     % Body text starts 1/3 of the way down from the top of page
-    \titlespacing*{\chapter}{0pt}{0pt}{0.208\th@paperheight}
+    \titlespacing*{\chapter}{0pt}{0pt}{0.208\utl@paperheight}
 
 \else % `classicchapters` option
     \titleformat{\chapter}[display]
-        {\begin{singlespace}\normalfont\th@headingfont\huge\bfseries}
+        {\begin{singlespace}\normalfont\utl@headingfont\huge\bfseries}
         {%
             \vspace{-30pt}%
             \fontsize{56pt}{56pt}\selectfont%
@@ -338,11 +338,11 @@
 \fi
 
 % Other headings are kept the same but with previously specified font
-\titleformat*{\section}{\th@headingfont\Large}
-\titleformat*{\subsection}{\th@headingfont\large}
-\titleformat*{\subsubsection}{\th@headingfont\normalsize}
-\titleformat*{\paragraph}{\th@headingfont\normalsize}
-\titleformat*{\subparagraph}{\th@headingfont\normalsize}
+\titleformat*{\section}{\utl@headingfont\Large}
+\titleformat*{\subsection}{\utl@headingfont\large}
+\titleformat*{\subsubsection}{\utl@headingfont\normalsize}
+\titleformat*{\paragraph}{\utl@headingfont\normalsize}
+\titleformat*{\subparagraph}{\utl@headingfont\normalsize}
 
 % Environment to make a divider page with a background color, for example to
 % give a chapter its own title page
@@ -369,7 +369,7 @@
         % Chapter title to be printed on page
         {%
             \LARGE%
-            \ifth@marginchapters% `marginchapters` option
+            \ifutl@marginchapters% `marginchapters` option
                 \vspace{-5.5ex}% shifts label up so title position is unchanged
             \fi%
             \fontseries{l}\selectfont\lsstyle\MakeUppercase{#2}% label
@@ -390,7 +390,7 @@
         % Chapter title to be printed on page
         {%
             \LARGE%
-            \ifth@marginchapters% `marginchapters` option
+            \ifutl@marginchapters% `marginchapters` option
                 \vspace{-5.5ex}% shifts label up so title position is unchanged
             \fi%
             \fontseries{l}\selectfont\lsstyle\MakeUppercase{#2}% label
