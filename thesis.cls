@@ -34,7 +34,7 @@
 
 % Thesis type options
 \DeclareOption{master}{} % default
-\DeclareOption{phd}{ % 17x24 paper
+\DeclareOption{phd}{ % 17x24 paper and 10 pt font
     \setlength{\th@paperwidth}{170mm}
     \setlength{\th@paperheight}{240mm}
     \setlength{\th@textwidth}{345pt}
@@ -53,6 +53,13 @@
 \newif{\ifth@bleedenabled}
 \DeclareOption{bleed}{\th@bleedenabledtrue}
 
+% Chapter heading style options
+\newif{\ifth@marginchapters}
+\DeclareOption{classicchapters}{} % default
+\DeclareOption{marginchapters}{ % chapter numbers in right margin
+    \th@marginchapterstrue
+}
+
 % Suppress remaining book class options
 \DeclareOption*{\OptionNotUsed}
 
@@ -67,7 +74,7 @@
 \RequirePackage{emptypage}
 \RequirePackage{microtype}
 \RequirePackage{setspace}
-\RequirePackage{titlesec}
+\RequirePackage[\ifth@marginchapters rigidchapters\fi]{titlesec}
 \RequirePackage{titletoc}
 \RequirePackage{fancyhdr}
 \RequirePackage{xcolor}
@@ -110,7 +117,7 @@
     vscale=0.75,
     vmarginratio={1:1},
     hmarginratio=\th@hmarginratio,
-    headheight=14pt, % makes fancyhdr stop complaining
+    headheight=30pt, % good for up to two header lines
 }
 
 % Colors
@@ -285,27 +292,57 @@
 % Headings
 % =============================================================================
 
-\newcommand{\th@headingfont}{\opensans}
+\newcommand{\th@headingfont}{\opensans\bfseries}
 
-\titleformat{\chapter}[display]
-    {\begin{singlespace}\normalfont\th@headingfont\huge\bfseries}
-    {%
-        \vspace{-30pt}%
-        \fontsize{56pt}{56pt}\selectfont%
-        \raisebox{-12pt}{\uitslash{3}}%
-        \thechapter%
+\ifth@marginchapters % `marginchapters` option
+    % Right edge of chapter number, from left edge of text column
+    \newlength{\th@chapternumberoffset}
+    \setlength{\th@chapternumberoffset}{\th@textwidth}
+    \addtolength{\th@chapternumberoffset}{36pt}
+
+    % Chapter titles won't extend past 3/4 of text width
+    \newcommand{\th@chaptertitlebox}[1]{%
+        \begin{minipage}[t]{0.75\th@textwidth}%
+            \raggedright\Huge #1%
+        \end{minipage}%
     }
-    {20pt}{\raggedright\Huge}[\end{singlespace}]
-\titleformat{\section}
-    {\normalfont\th@headingfont\Large\bfseries}{\thesection}{1em}{}
-\titleformat{\subsection}
-    {\normalfont\th@headingfont\large\bfseries}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}
-    {\normalfont\th@headingfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
-\titleformat{\paragraph}[runin]
-    {\normalfont\th@headingfont\normalsize\bfseries}{\theparagraph}{1em}{}
-\titleformat{\subparagraph}[runin]
-    {\normalfont\th@headingfont\normalsize\bfseries}{\thesubparagraph}{1em}{}
+
+    \titleformat{\chapter}[block]
+        {\begin{singlespace}\normalfont\th@headingfont\huge}
+        {\rlap{\begin{minipage}[t]{\th@chapternumberoffset}%
+            \vspace{-36pt}%
+            \hspace{\th@chapternumberoffset}%
+            \raggedleft%
+            \fontsize{56pt}{56pt}\selectfont%
+            \smash{\raisebox{-18pt}{\uitslash{3}}}%
+            \thechapter%
+        \end{minipage}}}
+        {0pt}
+        {\th@chaptertitlebox}
+        [\end{singlespace}]
+
+
+    % Body text starts 1/3 of the way down from the top of page
+    \titlespacing*{\chapter}{0pt}{0pt}{0.208\th@paperheight}
+
+\else % `classicchapters` option
+    \titleformat{\chapter}[display]
+        {\begin{singlespace}\normalfont\th@headingfont\huge\bfseries}
+        {%
+            \vspace{-30pt}%
+            \fontsize{56pt}{56pt}\selectfont%
+            \raisebox{-12pt}{\uitslash{3}}%
+            \thechapter%
+        }
+        {20pt}{\raggedright\Huge}[\end{singlespace}]
+\fi
+
+% Other headings are kept the same but with previously specified font
+\titleformat*{\section}{\th@headingfont\Large}
+\titleformat*{\subsection}{\th@headingfont\large}
+\titleformat*{\subsubsection}{\th@headingfont\normalsize}
+\titleformat*{\paragraph}{\th@headingfont\normalsize}
+\titleformat*{\subparagraph}{\th@headingfont\normalsize}
 
 % Environment to make a divider page with a background color, for example to
 % give a chapter its own title page
@@ -324,17 +361,23 @@
     \fi%
     \chapter[\texorpdfstring{%
         % Chapter title to be printed in table of contents
-        {\lsstyle\textsc{\MakeLowercase{#2}}}\hspace{1em}\@shortchapter
+        {\lsstyle\textsc{\MakeLowercase{#2}}}:\hspace{0.5em}\@shortchapter
     }{%
         % Chapter title to be shown in PDF bookmark
-        #2. \@shortchapter%
+        #2: \@shortchapter%
     }]{%
         % Chapter title to be printed on page
-        {\LARGE\fontseries{l}\selectfont\lsstyle\MakeUppercase{#2}}\\
+        {%
+            \LARGE%
+            \ifth@marginchapters% `marginchapters` option
+                \vspace{-5.5ex}% shifts label up so title position is unchanged
+            \fi%
+            \fontseries{l}\selectfont\lsstyle\MakeUppercase{#2}% label
+        }\\
         \vspace{0.5ex}#3%
     }%
     % Chapter title to be printed in header
-    \chaptermark{#2\th@uitslashsep\@shortchapter}%
+    \chaptermark{#2: \@shortchapter}%
 }
 % Same command but unnumbered version, will still show in table of contents
 \newcommand{\@specialchapternonum}[3][]{%
@@ -345,18 +388,24 @@
     \fi%
     \chapter*{%
         % Chapter title to be printed on page
-        {\LARGE\fontseries{l}\selectfont\lsstyle\MakeUppercase{#2}}\\
+        {%
+            \LARGE%
+            \ifth@marginchapters% `marginchapters` option
+                \vspace{-5.5ex}% shifts label up so title position is unchanged
+            \fi%
+            \fontseries{l}\selectfont\lsstyle\MakeUppercase{#2}% label
+        }\\
         \vspace{0.5ex}#3%
     }%
     \addcontentsline{toc}{chapter}{\texorpdfstring{%
         % Chapter title to be printed in table of contents
-        {\lsstyle\textsc{\MakeLowercase{#2}}}\hspace{1em}\@shortchapter
+        {\lsstyle\textsc{\MakeLowercase{#2}}}:\hspace{0.5em}\@shortchapter
     }{%
         % Chapter title to be shown in PDF bookmark
-        #2. \@shortchapter%
+        #2: \@shortchapter%
     }}%
     % Chapter title to be printed in header
-    \markboth{\MakeUppercase{#2}\th@uitslashsep\MakeUppercase{\@shortchapter}}
+    \markboth{\MakeUppercase{#2}: \MakeUppercase{\@shortchapter}}
         {}%
 }
 
