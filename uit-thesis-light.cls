@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{uit-thesis-light}[2025/05/19 UiT Thesis Document Class by Cooper Johnston]
+\ProvidesClass{uit-thesis-light}[2025/10/15 UiT Thesis Document Class by Cooper Johnston]
 
 % Base class and options
 % =============================================================================
@@ -13,7 +13,7 @@
 \newlength{\utl@paperheight}
 \setlength{\utl@paperheight}{297mm}
 \newlength{\utl@textwidth}
-\setlength{\utl@textwidth}{360pt}
+\setlength{\utl@textwidth}{5in}
 \newcommand{\utl@hmarginratio}{2:3}
 
 % Default sizes for title page; see title page section further down
@@ -37,7 +37,7 @@
 \DeclareOption{phd}{ % 17x24 paper and 10 pt font
     \setlength{\utl@paperwidth}{170mm}
     \setlength{\utl@paperheight}{240mm}
-    \setlength{\utl@textwidth}{345pt}
+    \setlength{\utl@textwidth}{4.75in}
     \renewcommand{\utl@hmarginratio}{1:1}
     \setlength{\utl@titleElementWidth}{176mm}
     \setlength{\utl@titleElementHeight}{135mm}
