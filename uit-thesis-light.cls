@@ -84,8 +84,7 @@
 \RequirePackage{eso-pic}
 \RequirePackage{graphicx}
 \RequirePackage[pdfusetitle,bookmarksnumbered,hidelinks]{hyperref}
-\RequirePackage[defaultsans,scale=0.92]{opensans}
-    % scaled for more compatible x-height with most serif body text fonts
+\RequirePackage[defaultsans]{opensans}
 
 % Page geometry
 % =============================================================================
@@ -235,19 +234,20 @@
         \begin{minipage}[b][\utl@titleTextBottom]{\textwidth}%
             \begin{singlespace}%
                 \raggedright\opensans%
-                {\fontseries{l}\fontsize{12pt}{16.8pt}\selectfont%
+                {\fontseries{l}\fontsize{12pt}{14.4pt}\selectfont%
                     \@faculty\\
                     \ifdefined\@department\@department\fi\par}%
-                \vspace{10pt}%
-                {\fontseries{sb}\fontsize{15pt}{18pt}\selectfont\@title\par}%
-                \vspace{8pt}%
+                \vspace{5pt}%
+                {\fontseries{sb}\fontsize{14pt}{16.8pt}\selectfont\@title\par}%
+                \vspace{5pt}%
                 \ifdefined\@subtitle%
-                    {\fontseries{m}\fontsize{13pt}{15.6pt}\selectfont%
+                    {\fontseries{m}\fontsize{12pt}{14.4pt}\selectfont%
                         \@subtitle\par}%
                 \fi%
-                \vspace{8pt}%
-                {\fontseries{l}\fontsize{11pt}{15.4pt}\selectfont%
+                \vspace{14.4pt}%
+                {\fontseries{l}\fontsize{10pt}{12pt}\selectfont%
                     \@author\\
+                    \vspace{5pt}%
                     \@course, \@date\par}%
             \end{singlespace}%
         \end{minipage}%
@@ -466,6 +466,3 @@
 
 % Norwegian-style quotes for Northern Sami with csquotes package
 \DeclareQuoteAlias[guillemets]{norwegian}{samin}
-
-% Default line spacing is 1.2; stretching by 1.1 gives 1.32 spacing.
-\setstretch{1.1}
